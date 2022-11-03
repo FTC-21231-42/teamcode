@@ -23,6 +23,7 @@ public class DriveControl_Test extends LinearOpMode {
 
         int elePos = 0;
         double collectorPos = 0;
+        int eleTargetPos = 0;
 
         float stickRightX1, stickRightY1;
         float fixedStickRightX1, fixedStickRightY1;
@@ -120,12 +121,15 @@ public class DriveControl_Test extends LinearOpMode {
 
              */
 
+
             //elevator
             elePos = eleMotor.getCurrentPosition();
+//            if (gamepad2.left_stick_y < -0.1) {
             if (elePos < ELE_MAX_POS && gamepad2.left_stick_y < -0.1) {
                 //up
                 eleMotor.setPower(0.8);
 
+//            } else if (gamepad2.left_stick_y > 0.1) {
             } else if (elePos > ELE_MIN_POS && gamepad2.left_stick_y > 0.1) {
                 //down
                 eleMotor.setPower(-0.6);
@@ -135,6 +139,19 @@ public class DriveControl_Test extends LinearOpMode {
                 eleMotor.setPower(0);
 
             }
+
+
+
+//            elePos = eleMotor.getCurrentPosition();
+//
+//            if (gamepad2.a) eleTargetPos = 0;
+//            if (gamepad2.b) eleTargetPos = ELE_BOT;
+//            if (gamepad2.x) eleTargetPos = ELE_MID;
+//            if (gamepad2.y) eleTargetPos = ELE_TOP;
+//
+//            eleMotor.setTargetPosition(eleTargetPos);
+//            eleMotor.setPower(1);
+//            eleMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
             //collector
             collectorPos = collectorServo.getPosition();
@@ -176,6 +193,7 @@ public class DriveControl_Test extends LinearOpMode {
             telemetry.addData("left_stick_x;", gamepad1.left_stick_x);
             telemetry.addData("lTrigger", gamepad1.left_trigger);
             telemetry.addData("rTrigger", gamepad1.right_stick_x);
+            telemetry.addData("left_stick_y2", gamepad2.left_stick_y);
             telemetry.addData("bPower", basePower);
             telemetry.addData("elePos", elePos);
             telemetry.addData("collectorPos", collectorPos);

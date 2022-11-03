@@ -18,9 +18,11 @@ public class DriveControl_3 extends OpMode {
 
     int elePos = 0;
     int eleTargetPos = 0;
+    boolean eleDowning = false;
     double collectorPos = 0;
 
     ElapsedTime runtime = new ElapsedTime();
+    ElapsedTime runtimeEle = new ElapsedTime();
 
     @Override
     public void init() {
@@ -60,21 +62,27 @@ public class DriveControl_3 extends OpMode {
         //end of driving
 
         elePos = eleMotor.getCurrentPosition();
-        if (gamepad2.left_stick_y < -0.1) {
-            //up
-            eleTargetPos += (int) Math.abs(gamepad2.left_stick_y * 5 + 1);
 
-        } else if (gamepad2.left_stick_y > 0.1) {
-            //down
-            eleTargetPos -= (int) Math.abs(gamepad2.left_stick_y * 5 + 1);
+        //elevator
+        if (gamepad2.a && runtimeEle.seconds() >= 0.5) {
+            if (eleDowning) {
+                eleTargetPos = 0;
+                eleDowning = false;
+
+            } else {
+                eleTargetPos = ELE_COL;
+                eleDowning = true;
+
+            }
+            runtimeEle.reset();
 
         }
-
-        if (eleTargetPos > ELE_MAX_POS) eleTargetPos = ELE_MAX_POS;
-        if (eleTargetPos < ELE_MIN_POS) eleTargetPos = ELE_MIN_POS;
+        if (gamepad2.b) eleTargetPos = ELE_BOT;
+        if (gamepad2.x) eleTargetPos = ELE_MID;
+        if (gamepad2.y) eleTargetPos = ELE_TOP;
 
         eleMotor.setTargetPosition(eleTargetPos);
-        eleMotor.setPower(0.95);
+        eleMotor.setPower(1);
         eleMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         //collector
