@@ -15,6 +15,7 @@ public class DriveControl_3 extends OpMode {
     double leftFrontPower = 0, rightFrontPower = 0, leftBotPower = 0, rightBotPower = 0;
 
     float stickRightX1, stickRightY1, stickLeftX1;
+    double stickRightStrength;
 
     int elePos = 0;
     int eleTargetPos = 0;
@@ -44,8 +45,13 @@ public class DriveControl_3 extends OpMode {
         stickRightY1 = this.gamepad1.right_stick_y;
         stickLeftX1 = this.gamepad1.left_stick_x;
 
+        //get the strength of input of right stick
+        //if rotating, set to 1
+        stickRightStrength = Math.sqrt((stickRightX1 * stickRightX1) + (stickRightY1 * stickRightY1));
+        if (stickLeftX1 != 0) stickRightStrength = 1;
+
         //use left trigger 1 to control the speed, push to set slower
-        basePower = ((1 - (gamepad1.left_trigger + gamepad1.right_trigger) * 0.45) + 0.1) * ovaPowerModify;
+        basePower = ((1 - (gamepad1.left_trigger + gamepad1.right_trigger) * 0.45) + 0.1) * stickRightStrength * ovaPowerModify;
 
         //set the power of motor
         //FINAL POWER = power * modify
@@ -107,7 +113,7 @@ public class DriveControl_3 extends OpMode {
         telemetry.addData("left_stick_x;", gamepad1.left_stick_x);
         telemetry.addData("left_stick_y;", gamepad1.left_stick_y);
         telemetry.addData("lTrigger", gamepad1.left_trigger);
-        telemetry.addData("rTrigger", gamepad1.right_stick_x);
+        telemetry.addData("rTrigger", gamepad1.right_trigger);
         telemetry.addData("bPower", basePower);
         telemetry.addData("elePos", elePos);
         telemetry.update();
