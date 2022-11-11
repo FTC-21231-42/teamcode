@@ -48,7 +48,7 @@ public class DriveControl_3 extends OpMode {
         //get the strength of input of right stick
         //if rotating, set to 1
         stickRightStrength = Math.sqrt((stickRightX1 * stickRightX1) + (stickRightY1 * stickRightY1));
-        if (stickLeftX1 != 0) stickRightStrength = 1;
+        if (stickLeftX1 != 0) stickRightStrength = Math.abs(stickLeftX1);
 
         //use left trigger 1 to control the speed, push to set slower
         basePower = ((1 - (gamepad1.left_trigger + gamepad1.right_trigger) * 0.45) + 0.1) * stickRightStrength * ovaPowerModify;

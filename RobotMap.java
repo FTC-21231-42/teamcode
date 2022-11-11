@@ -26,16 +26,22 @@ public class RobotMap {
     static DcMotor eleMotor;
 
     static int ELE_MIN_POS = 0;
-    static int ELE_MAX_POS = 2150;
+//    static int ELE_MAX_POS = 2150;
+    static int ELE_MAX_POS = 2050;
 
     static double COLLECT_MIN_POS = 0.045;
     static double COLLECT_MAX_POS = 0.28;
     static boolean COLLECT_CURRENT = false;
 
+//    static int ELE_COL = 225;
+//    static int ELE_BOT = 1000;
+//    static int ELE_MID = 1600;
+//    static int ELE_TOP = 2125;
+
     static int ELE_COL = 225;
     static int ELE_BOT = 1000;
     static int ELE_MID = 1600;
-    static int ELE_TOP = 2125;
+    static int ELE_TOP = 2050;
 
     static Servo collectorServo;
 
