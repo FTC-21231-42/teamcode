@@ -30,7 +30,7 @@ public class RobotMap {
     static int ELE_MAX_POS = 2050;
 
     static double COLLECT_MIN_POS = 0.045;
-    static double COLLECT_MAX_POS = 0.28;
+    static double COLLECT_MAX_POS = 0.195;
     static boolean COLLECT_CURRENT = false;
 
 //    static int ELE_COL = 225;

@@ -14,16 +14,16 @@ public class DriveControl_3 extends OpMode {
     double basePower = 0;
     double leftFrontPower = 0, rightFrontPower = 0, leftBotPower = 0, rightBotPower = 0;
 
-    float stickRightX1, stickRightY1, stickLeftX1;
-    double stickRightStrength;
+    float stickRightX1, stickRightY1, stickLeftX1, stickLeftY1;
+    double stickRightStrength = 1;
 
     int elePos = 0;
     int eleTargetPos = 0;
     boolean eleDowning = false;
     double collectorPos = 0;
 
-    ElapsedTime runtime = new ElapsedTime();
     ElapsedTime runtimeEle = new ElapsedTime();
+    ElapsedTime runtimeCol = new ElapsedTime();
 
     @Override
     public void init() {
@@ -44,14 +44,16 @@ public class DriveControl_3 extends OpMode {
         stickRightX1 = this.gamepad1.right_stick_x;
         stickRightY1 = this.gamepad1.right_stick_y;
         stickLeftX1 = this.gamepad1.left_stick_x;
+        stickLeftY1 = this.gamepad1.left_stick_y;
 
         //get the strength of input of right stick
         //if rotating, set to 1
-        stickRightStrength = Math.sqrt((stickRightX1 * stickRightX1) + (stickRightY1 * stickRightY1));
-        if (stickLeftX1 != 0) stickRightStrength = Math.abs(stickLeftX1);
+//        stickRightStrength = Math.sqrt((stickRightX1 * stickRightX1) + (stickRightY1 * stickRightY1));
+//        if (stickLeftX1 != 0) stickRightStrength = Math.sqrt((stickLeftX1 * stickLeftX1) + (stickLeftY1 * stickLeftY1));
 
         //use left trigger 1 to control the speed, push to set slower
         basePower = ((1 - (gamepad1.left_trigger + gamepad1.right_trigger) * 0.45) + 0.1) * stickRightStrength * ovaPowerModify;
+//        basePower *= basePower;
 
         //set the power of motor
         //FINAL POWER = power * modify
@@ -70,7 +72,7 @@ public class DriveControl_3 extends OpMode {
         elePos = eleMotor.getCurrentPosition();
 
         //elevator
-        if (gamepad2.a && runtimeEle.seconds() >= 0.5) {
+        if (gamepad2.a && runtimeEle.seconds() >= 0.05) {
             if (eleDowning) {
                 eleTargetPos = 0;
                 eleDowning = false;
@@ -92,7 +94,7 @@ public class DriveControl_3 extends OpMode {
         eleMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         //collector
-        if (gamepad2.right_trigger > 0.1 && runtime.seconds() >= 0.5) {
+        if (gamepad2.right_trigger > 0.1 && runtimeCol.seconds() >= 0.5) {
             if (COLLECT_CURRENT) {
                 collectorServo.setPosition(COLLECT_MAX_POS);
                 COLLECT_CURRENT = false;
@@ -103,7 +105,7 @@ public class DriveControl_3 extends OpMode {
 
             }
             //if last press was too close, won't do anything
-            runtime.reset();
+            runtimeCol.reset();
 
         }
 
