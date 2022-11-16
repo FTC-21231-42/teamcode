@@ -19,17 +19,14 @@ import java.util.List;
 public class TFTest extends LinearOpMode {
     static ElapsedTime runtime = new ElapsedTime();
     static final String[] LABELS_LOC = {
-            "Masked",
-            "No Mask"
+            "one",
+            "three",
+            "two"
     };
-    static final String TFOD_MODEL_ASSET_LOC = "/sdcard/FIRST/tflitemodels/model.tflite";
+    static final String TFOD_MODEL_ASSET_LOC = "/sdcard/FIRST/tflitemodels/model_20221115_170718.tflite";
 
     @Override
     public void runOpMode() throws InterruptedException {
-        //init hardware map
-//        initRobot(hardwareMap);
-        //if can't detect anything, so move to parking
-
         //init api
         initVuforia();
         initTFod();
@@ -64,7 +61,7 @@ public class TFTest extends LinearOpMode {
         int tfodMonitorViewId = hardwareMap.appContext.getResources().getIdentifier(
                 "tfodMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         TFObjectDetector.Parameters tfodParameters = new TFObjectDetector.Parameters(tfodMonitorViewId);
-        tfodParameters.minResultConfidence = 0.7f;
+        tfodParameters.minResultConfidence = 0.67f;
         tfodParameters.isModelTensorFlow2 = true;
         tfodParameters.inputSize = 320;
         tFod = ClassFactory.getInstance().createTFObjectDetector(tfodParameters, vuforia);
