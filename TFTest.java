@@ -23,7 +23,8 @@ public class TFTest extends LinearOpMode {
             "three",
             "two"
     };
-    static final String TFOD_MODEL_ASSET_LOC = "/sdcard/FIRST/tflitemodels/model_20221115_170718.tflite";
+    static final String TFOD_MODEL_ASSET_LOC = "/sdcard/FIRST/tflitemodels/model_v2" +
+            ".tflite";
 
     @Override
     public void runOpMode() throws InterruptedException {
