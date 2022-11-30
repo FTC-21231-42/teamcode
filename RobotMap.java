@@ -26,22 +26,23 @@ public class RobotMap {
     static DcMotor eleMotor;
 
     static int ELE_MIN_POS = 0;
-//    static int ELE_MAX_POS = 2150;
-    static int ELE_MAX_POS = 2050;
+//    static int ELE_MAX_POS = 2050;
+    static int ELE_MAX_POS = 2850;
 
     static double COLLECT_MIN_POS = 0.045;
     static double COLLECT_MAX_POS = 0.195;
     static boolean COLLECT_CURRENT = false;
 
+    static int ELE_COL = 450;
+    static int ELE_BOT = 1400;
+    static int ELE_MID = 21
+        50;
+    static int ELE_TOP = 2850;
+
 //    static int ELE_COL = 225;
 //    static int ELE_BOT = 1000;
 //    static int ELE_MID = 1600;
-//    static int ELE_TOP = 2125;
-
-    static int ELE_COL = 225;
-    static int ELE_BOT = 1000;
-    static int ELE_MID = 1600;
-    static int ELE_TOP = 2050;
+//    static int ELE_TOP = 2050;
 
     static Servo collectorServo;
 
@@ -97,6 +98,7 @@ public class RobotMap {
         rightBotMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         eleMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        eleMotor.setDirection(DcMotorSimple.Direction.REVERSE);
 
 //        collectorServo.setPosition(0);
 
