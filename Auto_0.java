@@ -37,73 +37,64 @@ public class Auto_0 extends LinearOpMode {
             tFod.setZoom(1.0, 16.0 / 9.0);
         }
 
+        Claw(true);
+
         telemetry.addData("Initialized", "True");
         telemetry.update();
         waitForStart();
 
         //if can see anything after 5 seconds
         runtime.reset();
-        while (opModeIsActive() && targetPos == IconType.NA && runtime.seconds() < 10.0) {
-            //detect icon
-            targetPos = detectObject();
-            sleep(50);
-
-        }
+//        while (opModeIsActive() && targetPos == IconType.NA && runtime.seconds() < 10.0) {
+//            //detect icon
+//            targetPos = detectObject();
+//            sleep(50);
+//
+//        }
 
         telemetry.addData("TargetPos", targetPos);
         telemetry.update();
 
-        /*
-        while (opModeIsActive()){
-            telemetry.addData("TargetPos", detectObject());
-            telemetry.addData("Initialized", "True");
-            telemetry.update();
+        Elevator(ELE_COL);
 
-        }
+        Move(-15, 0.8, Direction.LEFT_RIGHT, 1.5);
+        Move(60, 0.8, Direction.LEFT_RIGHT, 1.5);
+        Move(80, 0.8, Direction.FRONT_BACK, 2);
+        Move(20, 0.8, Direction.LEFT_RIGHT, 1);
+        Move(10, 0.8, Direction.FRONT_BACK, 1);
 
-        */
-        /*
-            while (opModeIsActive()) {
-                if (gamepad1.a) Move(30, 0.35, Direction.FRONT_BACK, 3);
-                if (gamepad1.b) Move(30, 0.35, Direction.LEFT_RIGHT, 3);
-                if (gamepad1.x) Move(30, 0.35, Direction.SIDE_FRONT_LEFT, 3);
-                if (gamepad1.y) Move(30, 0.35, Direction.SIDE_FRONT_RIGHT, 3);
+        Elevator(ELE_TOP);
+        Claw(false);
+        sleep(150);
 
-                telemetry.addData("lf", leftFrontMotor.getCurrentPosition());
-                telemetry.addData("rf", rightFrontMotor.getCurrentPosition());
-                telemetry.addData("lb", leftBotMotor.getCurrentPosition());
-                telemetry.addData("rb", rightBotMotor.getCurrentPosition());
-
-                telemetry.update();
-
-            }
-             */
+        Move(-10, 0.8, Direction.FRONT_BACK, 1);
 
         //move to stop position
         switch (targetPos) {
             case BOLT:
-                Move(70, 0.5, Direction.LEFT_RIGHT, 3);
-                Move(70, 0.5, Direction.FRONT_BACK, 3);
+                Move(150, 0.8, Direction.LEFT_RIGHT, 3);
 
                 break;
 
             case BULB:
-                Move(70, 0.5, Direction.FRONT_BACK, 3);
+                Move(90, 0.8, Direction.LEFT_RIGHT, 3);
 
                 break;
 
             case PANEL:
-                Move(-70, 0.5, Direction.LEFT_RIGHT, 3);
-                Move(70, 0.5, Direction.FRONT_BACK, 3);
+                Move(30, 0.8, Direction.LEFT_RIGHT, 3);
 
                 break;
 
             case NA:
-                Move(75, 0.5, Direction.LEFT_RIGHT, 3);
+                Move(90, 0.8, Direction.LEFT_RIGHT, 3);
 
                 break;
 
         }
+
+        sleep(150);
+        Elevator(ELE_MIN_POS);
 
 
     }
@@ -202,6 +193,8 @@ public class Auto_0 extends LinearOpMode {
                 telemetry.addData("ERROR", "In Move()");
                 telemetry.update();
 
+                sleep(50);
+
         }
 
         //group 1
@@ -247,4 +240,18 @@ public class Auto_0 extends LinearOpMode {
         sleep(250);
 
     }
+
+    static void Elevator(double level) {
+        eleMotor.setTargetPosition((int) level);
+        eleMotor.setPower(1);
+        eleMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+    }
+
+    static void Claw(boolean state) {
+        if (state) collectorServo.setPosition(COLLECT_MIN_POS);
+        else collectorServo.setPosition(COLLECT_MAX_POS);
+
+    }
+
 }

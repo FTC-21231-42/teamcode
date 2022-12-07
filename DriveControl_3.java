@@ -21,6 +21,7 @@ public class DriveControl_3 extends OpMode {
     boolean eleDowning = false;
 
     ElapsedTime runtimeCol = new ElapsedTime();
+    ElapsedTime runtimeEle = new ElapsedTime();
 
     @Override
     public void init() {
@@ -64,7 +65,7 @@ public class DriveControl_3 extends OpMode {
         elePos = eleMotor.getCurrentPosition();
 
         //elevator
-        if (gamepad2.a) {
+        if (gamepad2.a && runtimeCol.seconds() >= 0.2) {
             if (eleDowning) {
                 eleTargetPos = 0;
                 eleDowning = false;
@@ -74,6 +75,8 @@ public class DriveControl_3 extends OpMode {
                 eleDowning = true;
 
             }
+
+            runtimeCol.reset();
 
         }
         if (gamepad2.b) eleTargetPos = ELE_BOT;

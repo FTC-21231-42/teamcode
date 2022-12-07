@@ -23,8 +23,7 @@ public class TFTest extends LinearOpMode {
             "three",
             "two"
     };
-    static final String TFOD_MODEL_ASSET_LOC = "/sdcard/FIRST/tflitemodels/model_v2" +
-            ".tflite";
+    static final String TFOD_MODEL_ASSET_LOC = "/sdcard/FIRST/tflitemodels/model_b2.tflite";
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -35,7 +34,7 @@ public class TFTest extends LinearOpMode {
         //activate tensorflow
         if (tFod != null) {
             tFod.activate();
-            tFod.setZoom(1.0, 16.0 / 9.0);
+            tFod.setZoom(1.5, 16.0 / 9.0);
         }
 
         telemetry.addData("Initialized", "True");

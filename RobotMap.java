@@ -35,8 +35,7 @@ public class RobotMap {
 
     static int ELE_COL = 450;
     static int ELE_BOT = 1400;
-    static int ELE_MID = 21
-        50;
+    static int ELE_MID = 2150;
     static int ELE_TOP = 2850;
 
 //    static int ELE_COL = 225;
