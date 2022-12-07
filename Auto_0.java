@@ -48,7 +48,7 @@ public class Auto_0 extends LinearOpMode {
 //        while (opModeIsActive() && targetPos == IconType.NA && runtime.seconds() < 10.0) {
 //            //detect icon
 //            targetPos = detectObject();
-//            sleep(50);
+//            sleep(20);
 //
 //        }
 
@@ -56,38 +56,39 @@ public class Auto_0 extends LinearOpMode {
         telemetry.update();
 
         Elevator(ELE_COL);
+        sleep(50);
 
-        Move(-15, 0.8, Direction.LEFT_RIGHT, 1.5);
-        Move(60, 0.8, Direction.LEFT_RIGHT, 1.5);
-        Move(80, 0.8, Direction.FRONT_BACK, 2);
-        Move(20, 0.8, Direction.LEFT_RIGHT, 1);
-        Move(10, 0.8, Direction.FRONT_BACK, 1);
-
+        Move(-60, 0.8, Direction.LEFT_RIGHT, 2);
+        Move(70, 0.8, Direction.FRONT_BACK, 3);
         Elevator(ELE_TOP);
-        Claw(false);
-        sleep(150);
+        Move(-41, 0.8, Direction.LEFT_RIGHT, 2);
+        Move(8, 0.8, Direction.FRONT_BACK, 2);
+        sleep(400);
 
-        Move(-10, 0.8, Direction.FRONT_BACK, 1);
+        Claw(false);
+        sleep(400);
+
+        Move(-15, 0.8, Direction.FRONT_BACK, 1);
 
         //move to stop position
         switch (targetPos) {
             case BOLT:
-                Move(150, 0.8, Direction.LEFT_RIGHT, 3);
+                Move(160, 0.8, Direction.LEFT_RIGHT, 3);
 
                 break;
 
             case BULB:
-                Move(90, 0.8, Direction.LEFT_RIGHT, 3);
+                Move(100, 0.8, Direction.LEFT_RIGHT, 3);
 
                 break;
 
             case PANEL:
-                Move(30, 0.8, Direction.LEFT_RIGHT, 3);
+                Move(40, 0.8, Direction.LEFT_RIGHT, 3);
 
                 break;
 
             case NA:
-                Move(90, 0.8, Direction.LEFT_RIGHT, 3);
+                Move(100, 0.8, Direction.LEFT_RIGHT, 3);
 
                 break;
 
@@ -95,6 +96,7 @@ public class Auto_0 extends LinearOpMode {
 
         sleep(150);
         Elevator(ELE_MIN_POS);
+        sleep(2000);
 
 
     }
@@ -146,7 +148,7 @@ public class Auto_0 extends LinearOpMode {
 
     /**
      * Move the robot
-     * axle (by power and direction): y+ being front, y- being back, x+ being right, x- being left
+     * axle (by power and direction): y+ being front, y- being back, x+ being left, x- being right
      * side moving alex: front direction being +
      * Unit: centimeter (cm)
      *
@@ -249,7 +251,7 @@ public class Auto_0 extends LinearOpMode {
     }
 
     static void Claw(boolean state) {
-        if (state) collectorServo.setPosition(COLLECT_MIN_POS);
+        if (!state) collectorServo.setPosition(COLLECT_MIN_POS);
         else collectorServo.setPosition(COLLECT_MAX_POS);
 
     }
