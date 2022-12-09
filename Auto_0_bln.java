@@ -1,7 +1,25 @@
 package org.firstinspires.ftc.teamcode;
 
 
-import static org.firstinspires.ftc.teamcode.RobotMap.*;
+import static org.firstinspires.ftc.teamcode.RobotMap.COLLECT_MAX_POS;
+import static org.firstinspires.ftc.teamcode.RobotMap.COLLECT_MIN_POS;
+import static org.firstinspires.ftc.teamcode.RobotMap.Direction;
+import static org.firstinspires.ftc.teamcode.RobotMap.ELE_COL;
+import static org.firstinspires.ftc.teamcode.RobotMap.ELE_MIN_POS;
+import static org.firstinspires.ftc.teamcode.RobotMap.ELE_TOP;
+import static org.firstinspires.ftc.teamcode.RobotMap.IconTypeN;
+import static org.firstinspires.ftc.teamcode.RobotMap.LABELS;
+import static org.firstinspires.ftc.teamcode.RobotMap.TFOD_MODEL_ASSET;
+import static org.firstinspires.ftc.teamcode.RobotMap.VUFORIA_KEY;
+import static org.firstinspires.ftc.teamcode.RobotMap.collectorServo;
+import static org.firstinspires.ftc.teamcode.RobotMap.eleMotor;
+import static org.firstinspires.ftc.teamcode.RobotMap.initRobot;
+import static org.firstinspires.ftc.teamcode.RobotMap.leftBotMotor;
+import static org.firstinspires.ftc.teamcode.RobotMap.leftFrontMotor;
+import static org.firstinspires.ftc.teamcode.RobotMap.rightBotMotor;
+import static org.firstinspires.ftc.teamcode.RobotMap.rightFrontMotor;
+import static org.firstinspires.ftc.teamcode.RobotMap.tFod;
+import static org.firstinspires.ftc.teamcode.RobotMap.vuforia;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -16,8 +34,8 @@ import org.firstinspires.ftc.robotcore.external.tfod.TFObjectDetector;
 
 import java.util.List;
 
-@Autonomous(name = "Auto_0", group = "0")
-public class Auto_0 extends LinearOpMode {
+@Autonomous(name = "Auto_new_bule_left", group = "0")
+public class Auto_0_bln extends LinearOpMode {
     static ElapsedTime runtime = new ElapsedTime();
 
     @Override

@@ -12,7 +12,8 @@ public class RobotMap {
     //tf and vuforia
     static final String VUFORIA_KEY = "AQMzFW3/////AAABmbeNyVU2Y0RtubAsx+MyOM41z7gags/qzhp4KLi3oPaw4cNKJHv0bGKmQUZUjuqDQfMIwJaiagRRZ8HC+FQAFWwtSQ4NbkAykIX+BlfH9uMbIvXAQrQTk18QFAKsixYyrDXTRKeEFiLr5ppKs1HF0w8awj6HAzwSoIf/h1JJPLsc1ch4GQiHg1KnBMiDMRvmpFKAQxdNEF11QaE/E4P+6KE0wslmhD2iIK0VtBYevOvBRC3kaS0LfM0dy2JxikfOEgUkK/yE8IaYJp2xCZt4b13aglweW9LesT5oZMe2zb8S7GfP+ZLEddFKbKnd7eWqkzcVNvMIliWhGocOZKr3aIvuJCJbS9Sc7OEk7fUTdthK";
 
-    static final String TFOD_MODEL_ASSET = "PowerPlay.tflite";
+    static final String TFOD_MODEL_ASSET = "/sdcard/FIRST/tflitemodels/model_c1.tflite";
+//    static final String TFOD_MODEL_ASSET = "PowerPlay.tflite";
     static final String[] LABELS = {
             "1 Bolt",
             "2 Bulb",
@@ -49,6 +50,14 @@ public class RobotMap {
         BOLT,
         BULB,
         PANEL,
+        NA
+
+    }
+
+    enum IconTypeN{
+        ONE,
+        TWO,
+        THREE,
         NA
 
     }

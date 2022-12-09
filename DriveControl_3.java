@@ -39,6 +39,11 @@ public class DriveControl_3 extends OpMode {
         //main
 
         //get the input from the game pad
+//        stickLeftX1 = this.gamepad1.right_stick_x;
+//        stickLeftY1 = this.gamepad1.right_stick_y;
+//        stickRightX1 = this.gamepad1.left_stick_x;
+//        stickRightY1 = this.gamepad1.left_stick_y;
+
         stickRightX1 = this.gamepad1.right_stick_x;
         stickRightY1 = this.gamepad1.right_stick_y;
         stickLeftX1 = this.gamepad1.left_stick_x;

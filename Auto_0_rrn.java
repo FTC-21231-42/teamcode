@@ -1,7 +1,25 @@
 package org.firstinspires.ftc.teamcode;
 
 
-import static org.firstinspires.ftc.teamcode.RobotMap.*;
+import static org.firstinspires.ftc.teamcode.RobotMap.COLLECT_MAX_POS;
+import static org.firstinspires.ftc.teamcode.RobotMap.COLLECT_MIN_POS;
+import static org.firstinspires.ftc.teamcode.RobotMap.Direction;
+import static org.firstinspires.ftc.teamcode.RobotMap.ELE_COL;
+import static org.firstinspires.ftc.teamcode.RobotMap.ELE_MIN_POS;
+import static org.firstinspires.ftc.teamcode.RobotMap.ELE_TOP;
+import static org.firstinspires.ftc.teamcode.RobotMap.IconTypeN;
+import static org.firstinspires.ftc.teamcode.RobotMap.LABELS;
+import static org.firstinspires.ftc.teamcode.RobotMap.TFOD_MODEL_ASSET;
+import static org.firstinspires.ftc.teamcode.RobotMap.VUFORIA_KEY;
+import static org.firstinspires.ftc.teamcode.RobotMap.collectorServo;
+import static org.firstinspires.ftc.teamcode.RobotMap.eleMotor;
+import static org.firstinspires.ftc.teamcode.RobotMap.initRobot;
+import static org.firstinspires.ftc.teamcode.RobotMap.leftBotMotor;
+import static org.firstinspires.ftc.teamcode.RobotMap.leftFrontMotor;
+import static org.firstinspires.ftc.teamcode.RobotMap.rightBotMotor;
+import static org.firstinspires.ftc.teamcode.RobotMap.rightFrontMotor;
+import static org.firstinspires.ftc.teamcode.RobotMap.tFod;
+import static org.firstinspires.ftc.teamcode.RobotMap.vuforia;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -16,8 +34,8 @@ import org.firstinspires.ftc.robotcore.external.tfod.TFObjectDetector;
 
 import java.util.List;
 
-@Autonomous(name = "Auto_0", group = "0")
-public class Auto_0 extends LinearOpMode {
+@Autonomous(name = "Auto_new_red_right", group = "0")
+public class Auto_0_rrn extends LinearOpMode {
     static ElapsedTime runtime = new ElapsedTime();
 
     @Override
@@ -58,10 +76,10 @@ public class Auto_0 extends LinearOpMode {
         Elevator(ELE_COL);
         sleep(50);
 
-        Move(-60, 0.8, Direction.LEFT_RIGHT, 2);
+        Move(60, 0.8, Direction.LEFT_RIGHT, 2);
         Move(70, 0.8, Direction.FRONT_BACK, 3);
         Elevator(ELE_TOP);
-        Move(-41, 0.8, Direction.LEFT_RIGHT, 2);
+        Move(41, 0.8, Direction.LEFT_RIGHT, 2);
         Move(8, 0.8, Direction.FRONT_BACK, 2);
         sleep(400);
 
@@ -73,22 +91,22 @@ public class Auto_0 extends LinearOpMode {
         //move to stop position
         switch (targetPos) {
             case ONE:
-                Move(160, 0.8, Direction.LEFT_RIGHT, 3);
+                Move(-160, 0.8, Direction.LEFT_RIGHT, 3);
 
                 break;
 
             case TWO:
-                Move(100, 0.8, Direction.LEFT_RIGHT, 3);
+                Move(-100, 0.8, Direction.LEFT_RIGHT, 3);
 
                 break;
 
             case THREE:
-                Move(40, 0.8, Direction.LEFT_RIGHT, 3);
+                Move(-40, 0.8, Direction.LEFT_RIGHT, 3);
 
                 break;
 
             case NA:
-                Move(100, 0.8, Direction.LEFT_RIGHT, 3);
+                Move(-100, 0.8, Direction.LEFT_RIGHT, 3);
 
                 break;
 

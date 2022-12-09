@@ -23,7 +23,7 @@ public class TFTest extends LinearOpMode {
             "three",
             "two"
     };
-    static final String TFOD_MODEL_ASSET_LOC = "/sdcard/FIRST/tflitemodels/model_b2.tflite";
+    static final String TFOD_MODEL_ASSET_LOC = "/sdcard/FIRST/tflitemodels/model_c1.tflite";
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -34,7 +34,7 @@ public class TFTest extends LinearOpMode {
         //activate tensorflow
         if (tFod != null) {
             tFod.activate();
-            tFod.setZoom(1.5, 16.0 / 9.0);
+            tFod.setZoom(1.2, 16.0 / 9.0);
         }
 
         telemetry.addData("Initialized", "True");
@@ -43,6 +43,7 @@ public class TFTest extends LinearOpMode {
 
         while (opModeIsActive()){
             telemetry.addData("Initialized", "True");
+            telemetry.addData(TFOD_MODEL_ASSET_LOC, "True");
             telemetry.update();
 
         }
@@ -61,7 +62,7 @@ public class TFTest extends LinearOpMode {
         int tfodMonitorViewId = hardwareMap.appContext.getResources().getIdentifier(
                 "tfodMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         TFObjectDetector.Parameters tfodParameters = new TFObjectDetector.Parameters(tfodMonitorViewId);
-        tfodParameters.minResultConfidence = 0.67f;
+        tfodParameters.minResultConfidence = 0.85f;
         tfodParameters.isModelTensorFlow2 = true;
         tfodParameters.inputSize = 320;
         tFod = ClassFactory.getInstance().createTFObjectDetector(tfodParameters, vuforia);
