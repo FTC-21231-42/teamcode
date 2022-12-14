@@ -67,16 +67,18 @@ public class DriveControl_3 extends OpMode {
         rightBotMotor.setPower(-rightBotPower);
         //end of driving
 
-        elePos = eleMotor.getCurrentPosition();
+//        elePos = eleMotor.getCurrentPosition();
 
         //elevator
         if (gamepad2.a && runtimeCol.seconds() >= 0.2) {
             if (eleDowning) {
-                eleTargetPos = 0;
+//                eleTargetPos = 0;
+                Elevator(0);
                 eleDowning = false;
 
             } else {
-                eleTargetPos = ELE_COL;
+//                eleTargetPos = ELE_COL;
+                Elevator(ELE_COL);
                 eleDowning = true;
 
             }
@@ -84,13 +86,17 @@ public class DriveControl_3 extends OpMode {
             runtimeCol.reset();
 
         }
-        if (gamepad2.b) eleTargetPos = ELE_BOT;
-        if (gamepad2.x) eleTargetPos = ELE_MID;
-        if (gamepad2.y) eleTargetPos = ELE_TOP;
+//        if (gamepad2.b) eleTargetPos = ELE_BOT;
+//        if (gamepad2.x) eleTargetPos = ELE_MID;
+//        if (gamepad2.y) eleTargetPos = ELE_TOP;
 
-        eleMotor.setTargetPosition(eleTargetPos);
-        eleMotor.setPower(1);
-        eleMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        if (gamepad2.b) Elevator(ELE_BOT);
+        if (gamepad2.x) Elevator(ELE_MID);;
+        if (gamepad2.y) Elevator(ELE_TOP);;
+
+//        eleMotor.setTargetPosition(eleTargetPos);
+//        eleMotor.setPower(1);
+//        eleMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         //collector
         if (gamepad2.right_trigger > 0.1 && runtimeCol.seconds() >= 0.5) {

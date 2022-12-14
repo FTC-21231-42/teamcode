@@ -34,7 +34,7 @@ public class Auto_0 extends LinearOpMode {
         //activate tensorflow
         if (tFod != null) {
             tFod.activate();
-            tFod.setZoom(1.0, 16.0 / 9.0);
+            tFod.setZoom(1.2, 16.0 / 9.0);
         }
 
         Claw(true);
@@ -58,10 +58,10 @@ public class Auto_0 extends LinearOpMode {
         Elevator(ELE_COL);
         sleep(50);
 
-        Move(-60, 0.8, Direction.LEFT_RIGHT, 2);
+        Move(-0, 0.8, Direction.LEFT_RIGHT, 2);
         Move(70, 0.8, Direction.FRONT_BACK, 3);
         Elevator(ELE_TOP);
-        Move(-41, 0.8, Direction.LEFT_RIGHT, 2);
+        Move(41, 0.8, Direction.LEFT_RIGHT, 2);
         Move(8, 0.8, Direction.FRONT_BACK, 2);
         sleep(400);
 
@@ -73,22 +73,22 @@ public class Auto_0 extends LinearOpMode {
         //move to stop position
         switch (targetPos) {
             case ONE:
-                Move(160, 0.8, Direction.LEFT_RIGHT, 3);
+                Move(-160, 0.8, Direction.LEFT_RIGHT, 3);
 
                 break;
 
             case TWO:
-                Move(100, 0.8, Direction.LEFT_RIGHT, 3);
+                Move(-100, 0.8, Direction.LEFT_RIGHT, 3);
 
                 break;
 
             case THREE:
-                Move(40, 0.8, Direction.LEFT_RIGHT, 3);
+                Move(-40, 0.8, Direction.LEFT_RIGHT, 3);
 
                 break;
 
             case NA:
-                Move(100, 0.8, Direction.LEFT_RIGHT, 3);
+                Move(-100, 0.8, Direction.LEFT_RIGHT, 3);
 
                 break;
 
@@ -97,7 +97,6 @@ public class Auto_0 extends LinearOpMode {
         sleep(150);
         Elevator(ELE_MIN_POS);
         sleep(2000);
-
 
     }
 
@@ -117,32 +116,7 @@ public class Auto_0 extends LinearOpMode {
         tfodParameters.isModelTensorFlow2 = true;
         tfodParameters.inputSize = 320;
         tFod = ClassFactory.getInstance().createTFObjectDetector(tfodParameters, vuforia);
-        tFod.loadModelFromAsset(TFOD_MODEL_ASSET, LABELS);
-
-    }
-
-    private IconTypeN detectObject() {
-        List<Recognition> updatedRecognitions = tFod.getUpdatedRecognitions();
-        if (updatedRecognitions != null) {
-            for (Recognition recognition : updatedRecognitions) {
-                switch (recognition.getLabel()) {
-                    case "one":
-                        return IconTypeN.ONE;
-
-                    case "two":
-                        return IconTypeN.TWO;
-
-                    case "three":
-                        return IconTypeN.THREE;
-
-                    default:
-                        break;
-
-                }
-
-            }
-        }
-        return IconTypeN.NA;
+        tFod.loadModelFromFile(TFOD_MODEL_ASSET, LABELS);
 
     }
 
@@ -199,13 +173,19 @@ public class Auto_0 extends LinearOpMode {
 
         }
 
+        lfPos -= (int) (distance * lfrbModify);
+        rbPos += (int) (distance * lfrbModify);
+
+        lbPos -= (int) (distance * rflbModify);
+        rfPos += (int) (distance * rflbModify);
+
         //group 1
-        leftFrontMotor.setTargetPosition(leftFrontMotor.getCurrentPosition() - (int) (distance * lfrbModify));
-        rightBotMotor.setTargetPosition(rightBotMotor.getCurrentPosition() + (int) (distance * lfrbModify));
+        leftFrontMotor.setTargetPosition(lfPos);
+        rightBotMotor.setTargetPosition(rbPos);
 
         //group 2
-        leftBotMotor.setTargetPosition(leftBotMotor.getCurrentPosition() - (int) (distance * rflbModify));
-        rightFrontMotor.setTargetPosition(rightFrontMotor.getCurrentPosition() + (int) (distance * rflbModify));
+        leftBotMotor.setTargetPosition(lbPos);
+        rightFrontMotor.setTargetPosition(rfPos);
 
         //reset the time and set the power
         runtime.reset();
@@ -240,19 +220,6 @@ public class Auto_0 extends LinearOpMode {
 
         //cool down for the next function
         sleep(250);
-
-    }
-
-    static void Elevator(double level) {
-        eleMotor.setTargetPosition((int) level);
-        eleMotor.setPower(1);
-        eleMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-    }
-
-    static void Claw(boolean state) {
-        if (!state) collectorServo.setPosition(COLLECT_MIN_POS);
-        else collectorServo.setPosition(COLLECT_MAX_POS);
 
     }
 

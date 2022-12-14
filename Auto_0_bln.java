@@ -1,25 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
 
-import static org.firstinspires.ftc.teamcode.RobotMap.COLLECT_MAX_POS;
-import static org.firstinspires.ftc.teamcode.RobotMap.COLLECT_MIN_POS;
-import static org.firstinspires.ftc.teamcode.RobotMap.Direction;
-import static org.firstinspires.ftc.teamcode.RobotMap.ELE_COL;
-import static org.firstinspires.ftc.teamcode.RobotMap.ELE_MIN_POS;
-import static org.firstinspires.ftc.teamcode.RobotMap.ELE_TOP;
-import static org.firstinspires.ftc.teamcode.RobotMap.IconTypeN;
-import static org.firstinspires.ftc.teamcode.RobotMap.LABELS;
-import static org.firstinspires.ftc.teamcode.RobotMap.TFOD_MODEL_ASSET;
-import static org.firstinspires.ftc.teamcode.RobotMap.VUFORIA_KEY;
-import static org.firstinspires.ftc.teamcode.RobotMap.collectorServo;
-import static org.firstinspires.ftc.teamcode.RobotMap.eleMotor;
-import static org.firstinspires.ftc.teamcode.RobotMap.initRobot;
-import static org.firstinspires.ftc.teamcode.RobotMap.leftBotMotor;
-import static org.firstinspires.ftc.teamcode.RobotMap.leftFrontMotor;
-import static org.firstinspires.ftc.teamcode.RobotMap.rightBotMotor;
-import static org.firstinspires.ftc.teamcode.RobotMap.rightFrontMotor;
-import static org.firstinspires.ftc.teamcode.RobotMap.tFod;
-import static org.firstinspires.ftc.teamcode.RobotMap.vuforia;
+import static org.firstinspires.ftc.teamcode.RobotMap.*;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -52,7 +34,7 @@ public class Auto_0_bln extends LinearOpMode {
         //activate tensorflow
         if (tFod != null) {
             tFod.activate();
-            tFod.setZoom(1.0, 16.0 / 9.0);
+            tFod.setZoom(1.2, 16.0 / 9.0);
         }
 
         Claw(true);
@@ -63,7 +45,7 @@ public class Auto_0_bln extends LinearOpMode {
 
         //if can see anything after 5 seconds
         runtime.reset();
-        while (opModeIsActive() && targetPos == IconTypeN.NA && runtime.seconds() < 10.0) {
+        while (opModeIsActive() && targetPos == IconTypeN.NA && runtime.seconds() < 8.0) {
             //detect icon
             targetPos = detectObject();
             sleep(20);
@@ -76,22 +58,22 @@ public class Auto_0_bln extends LinearOpMode {
         Elevator(ELE_COL);
         sleep(50);
 
-        Move(-60, 0.8, Direction.LEFT_RIGHT, 2);
-        Move(70, 0.8, Direction.FRONT_BACK, 3);
+        Move(-65, 0.8, Direction.LEFT_RIGHT, 2);
+        Move(63, 0.8, Direction.FRONT_BACK, 3);
         Elevator(ELE_TOP);
-        Move(-41, 0.8, Direction.LEFT_RIGHT, 2);
+        Move(-43.5, 0.8, Direction.LEFT_RIGHT, 2);
         Move(8, 0.8, Direction.FRONT_BACK, 2);
         sleep(400);
 
         Claw(false);
         sleep(400);
 
-        Move(-15, 0.8, Direction.FRONT_BACK, 1);
+        Move(-13, 0.8, Direction.FRONT_BACK, 1);
 
         //move to stop position
         switch (targetPos) {
             case ONE:
-                Move(160, 0.8, Direction.LEFT_RIGHT, 3);
+                Move(40, 0.8, Direction.LEFT_RIGHT, 3);
 
                 break;
 
@@ -101,7 +83,7 @@ public class Auto_0_bln extends LinearOpMode {
                 break;
 
             case THREE:
-                Move(40, 0.8, Direction.LEFT_RIGHT, 3);
+                Move(175, 0.8, Direction.LEFT_RIGHT, 3);
 
                 break;
 
@@ -135,32 +117,7 @@ public class Auto_0_bln extends LinearOpMode {
         tfodParameters.isModelTensorFlow2 = true;
         tfodParameters.inputSize = 320;
         tFod = ClassFactory.getInstance().createTFObjectDetector(tfodParameters, vuforia);
-        tFod.loadModelFromAsset(TFOD_MODEL_ASSET, LABELS);
-
-    }
-
-    private IconTypeN detectObject() {
-        List<Recognition> updatedRecognitions = tFod.getUpdatedRecognitions();
-        if (updatedRecognitions != null) {
-            for (Recognition recognition : updatedRecognitions) {
-                switch (recognition.getLabel()) {
-                    case "one":
-                        return IconTypeN.ONE;
-
-                    case "two":
-                        return IconTypeN.TWO;
-
-                    case "three":
-                        return IconTypeN.THREE;
-
-                    default:
-                        break;
-
-                }
-
-            }
-        }
-        return IconTypeN.NA;
+        tFod.loadModelFromFile(TFOD_MODEL_ASSET, LABELS);
 
     }
 
@@ -170,10 +127,10 @@ public class Auto_0_bln extends LinearOpMode {
      * side moving alex: front direction being +
      * Unit: centimeter (cm)
      *
-     * @param distance
-     * @param power
+     * @param distance Distance in cm
+     * @param power Power
      * @param direction FRONT_BACK, LEFT_RIGHT, SIDE_LEFT_RIGHT (left front to right bottom direction), SIDE_RIGHT_LEF T(right front to left bottom direction)
-     * @param timeout
+     * @param timeout Time out in seconds
      */
     private void Move(double distance, double power, Direction direction, double timeout) {
         distance *= 17.5;
@@ -197,7 +154,7 @@ public class Auto_0_bln extends LinearOpMode {
                 lfrbModify = 0;
                 rflbModify = 1.0;
                 // 1 / sin45
-                distance *= 1.414;
+                    distance *= 1.414;
 
                 break;
 
@@ -258,19 +215,6 @@ public class Auto_0_bln extends LinearOpMode {
 
         //cool down for the next function
         sleep(250);
-
-    }
-
-    static void Elevator(double level) {
-        eleMotor.setTargetPosition((int) level);
-        eleMotor.setPower(1);
-        eleMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-    }
-
-    static void Claw(boolean state) {
-        if (!state) collectorServo.setPosition(COLLECT_MIN_POS);
-        else collectorServo.setPosition(COLLECT_MAX_POS);
 
     }
 

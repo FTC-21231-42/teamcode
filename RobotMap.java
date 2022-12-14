@@ -4,7 +4,10 @@ import com.qualcomm.robotcore.hardware.*;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
+import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
 import org.firstinspires.ftc.robotcore.external.tfod.TFObjectDetector;
+
+import java.util.List;
 
 public class RobotMap {
     static HardwareMap hwMap;
@@ -14,17 +17,27 @@ public class RobotMap {
 
     static final String TFOD_MODEL_ASSET = "/sdcard/FIRST/tflitemodels/model_c1.tflite";
 //    static final String TFOD_MODEL_ASSET = "PowerPlay.tflite";
+//    static final String[] LABELS = {
+//            "1 Bolt",
+//            "2 Bulb",
+//            "3 Panel"
+//    };
+
     static final String[] LABELS = {
-            "1 Bolt",
-            "2 Bulb",
-            "3 Panel"
+            "one",
+            "three",
+            "two"
     };
+
+    static IconTypeN targetPos = IconTypeN.NA;
 
     static VuforiaLocalizer vuforia;
     static TFObjectDetector tFod;
 
     static DcMotor leftFrontMotor, rightFrontMotor, leftBotMotor, rightBotMotor;
     static DcMotor eleMotor;
+
+    static int lfPos, rfPos, lbPos, rbPos;
 
     static int ELE_MIN_POS = 0;
 //    static int ELE_MAX_POS = 2050;
@@ -109,6 +122,52 @@ public class RobotMap {
         eleMotor.setDirection(DcMotorSimple.Direction.REVERSE);
 
 //        collectorServo.setPosition(0);
+
+            lfPos = 0;
+            rfPos = 0;
+            lbPos = 0;
+            rbPos = 0;
+
+    }
+
+    public static IconTypeN detectObject() {
+        List<Recognition> updatedRecognitions = tFod.getUpdatedRecognitions();
+        if (updatedRecognitions != null) {
+            for (Recognition recognition : updatedRecognitions) {
+                switch (recognition.getLabel()) {
+                    case "one":
+                        return IconTypeN.ONE;
+
+                    case "two":
+                        return IconTypeN.TWO;
+
+                    case "three":
+                        return IconTypeN.THREE;
+
+                    default:
+                        break;
+
+                }
+
+            }
+        }
+        return IconTypeN.NA;
+
+    }
+
+    static double lastLevel = 0;
+    static void Elevator(double level) {
+        eleMotor.setTargetPosition((int) level);
+        eleMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        if (lastLevel > level) eleMotor.setPower(0.75);
+        else eleMotor.setPower(1);
+        lastLevel = level;
+
+    }
+
+    static void Claw(boolean state) {
+        if (!state) collectorServo.setPosition(COLLECT_MIN_POS);
+        else collectorServo.setPosition(COLLECT_MAX_POS);
 
     }
 

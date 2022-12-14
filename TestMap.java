@@ -5,13 +5,10 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class TestMap {
     static HardwareMap hwMap;
-    static DcMotor rightMotor, leftMotor;
+    static DcMotor testMotor;
 
     public static void initRobot(HardwareMap map){
-        rightMotor = map.get(DcMotor.class, "rightMotor");
-        leftMotor = map.get(DcMotor.class, "leftMotor");
-
-
+        testMotor = map.get(DcMotor.class, "testMotor");
 
     }
 }

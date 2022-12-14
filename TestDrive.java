@@ -3,7 +3,9 @@ package org.firstinspires.ftc.teamcode;
 import static org.firstinspires.ftc.teamcode.TestMap.*;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
+@TeleOp(name = "TestHub")
 public class TestDrive extends OpMode {
     @Override
     public void init() {
@@ -15,8 +17,9 @@ public class TestDrive extends OpMode {
 
     @Override
     public void loop() {
-        rightMotor.setPower(0.7);
-        leftMotor.setPower(-0.7);
+        testMotor.setPower(-gamepad1.right_stick_y);
+        telemetry.addData("-gamepad1.right_stick_y", -gamepad1.right_stick_y);
+        telemetry.update();
 
     }
 

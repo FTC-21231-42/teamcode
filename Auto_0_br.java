@@ -1,18 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
 
-import static org.firstinspires.ftc.teamcode.RobotMap.Direction;
-import static org.firstinspires.ftc.teamcode.RobotMap.IconType;
-import static org.firstinspires.ftc.teamcode.RobotMap.LABELS;
-import static org.firstinspires.ftc.teamcode.RobotMap.TFOD_MODEL_ASSET;
-import static org.firstinspires.ftc.teamcode.RobotMap.VUFORIA_KEY;
-import static org.firstinspires.ftc.teamcode.RobotMap.initRobot;
-import static org.firstinspires.ftc.teamcode.RobotMap.leftBotMotor;
-import static org.firstinspires.ftc.teamcode.RobotMap.leftFrontMotor;
-import static org.firstinspires.ftc.teamcode.RobotMap.rightBotMotor;
-import static org.firstinspires.ftc.teamcode.RobotMap.rightFrontMotor;
-import static org.firstinspires.ftc.teamcode.RobotMap.tFod;
-import static org.firstinspires.ftc.teamcode.RobotMap.vuforia;
+import static org.firstinspires.ftc.teamcode.RobotMap.*;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -36,7 +25,6 @@ public class Auto_0_br extends LinearOpMode {
         //init hardware map
         initRobot(hardwareMap);
         //if can't detect anything, so move to parking
-        IconType targetPos = IconType.NA;
 
         //init api
         initVuforia();
@@ -54,7 +42,7 @@ public class Auto_0_br extends LinearOpMode {
 
         //if can see anything after 5 seconds
         runtime.reset();
-        while (opModeIsActive() && targetPos == IconType.NA && runtime.seconds() < 10.0) {
+        while (opModeIsActive() && targetPos == IconTypeN.NA && runtime.seconds() < 10.0) {
             //detect icon
             targetPos = detectObject();
             sleep(50);
@@ -92,18 +80,18 @@ public class Auto_0_br extends LinearOpMode {
 
         //move to stop position
         switch (targetPos) {
-            case BOLT:
+            case ONE:
                 Move(70, 0.5, Direction.LEFT_RIGHT, 3);
                 Move(70, 0.5, Direction.FRONT_BACK, 3);
 
                 break;
 
-            case BULB:
+            case TWO:
                 Move(70, 0.5, Direction.FRONT_BACK, 3);
 
                 break;
 
-            case PANEL:
+            case THREE:
                 Move(-70, 0.5, Direction.LEFT_RIGHT, 3);
                 Move(70, 0.5, Direction.FRONT_BACK, 3);
 
@@ -135,32 +123,7 @@ public class Auto_0_br extends LinearOpMode {
         tfodParameters.isModelTensorFlow2 = true;
         tfodParameters.inputSize = 320;
         tFod = ClassFactory.getInstance().createTFObjectDetector(tfodParameters, vuforia);
-        tFod.loadModelFromAsset(TFOD_MODEL_ASSET, LABELS);
-
-    }
-
-    private IconType detectObject() {
-        List<Recognition> updatedRecognitions = tFod.getUpdatedRecognitions();
-        if (updatedRecognitions != null) {
-            for (Recognition recognition : updatedRecognitions) {
-                switch (recognition.getLabel()) {
-                    case "1 Bolt":
-                        return IconType.BOLT;
-
-                    case "2 Bulb":
-                        return IconType.BULB;
-
-                    case "3 Panel":
-                        return IconType.PANEL;
-
-                    default:
-                        break;
-
-                }
-
-            }
-        }
-        return IconType.NA;
+        tFod.loadModelFromFile(TFOD_MODEL_ASSET, LABELS);
 
     }
 
