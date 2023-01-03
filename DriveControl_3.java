@@ -49,7 +49,7 @@ public class DriveControl_3 extends OpMode {
         stickLeftX1 = this.gamepad1.left_stick_x;
         stickLeftY1 = this.gamepad1.left_stick_y;
 
-        //use left trigger 1 to control the speed, push to set slower
+        //use left trigger 1 and right trigger 1 to control the speed, push to set faster
         basePower = (((gamepad1.left_trigger + gamepad1.right_trigger) * 0.325) + 0.35) * ovaPowerModify;
         basePower *= basePower;
 
