@@ -156,18 +156,31 @@ public class DriveControl_Test extends LinearOpMode {
             //collector
             collectorPos = collectorServo.getPosition();
             if (gamepad1.x) {
-//            if (collectorPos < COLLECT_MAX_POS && gamepad1.x) {
                 //open
                 collectorServo.setPosition(collectorPos + 0.01);
                 sleep(100);
 
             } else if (gamepad1.y) {
-//            } else if (collectorPos > COLLECT_MIN_POS && gamepad1.y) {
                 //close
                 collectorServo.setPosition(collectorPos - 0.01);
                 sleep(100);
 
             }
+
+//            if (gamepad1.a) {
+//                //open
+//                armServo.setPosition(armServo.getPosition() + 0.01);
+//                sleep(100);
+//
+//            } else if (gamepad1.b) {
+//                //close
+//                armServo.setPosition(armServo.getPosition() - 0.01);
+//                sleep(100);
+//
+//            }
+
+            if (gamepad1.left_trigger > 0.1) armServo.setPosition(ARM_CLOSE);
+            else armServo.setPosition(ARM_OPEN);
 
 
             //one button open and close
@@ -196,6 +209,7 @@ public class DriveControl_Test extends LinearOpMode {
             telemetry.addData("left_stick_y2", gamepad2.left_stick_y);
             telemetry.addData("bPower", basePower);
             telemetry.addData("elePos", elePos);
+            telemetry.addData("armPos", armServo.getPosition());
             telemetry.addData("collectorPos", collectorPos);
             telemetry.update();
 

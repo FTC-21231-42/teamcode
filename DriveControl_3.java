@@ -114,6 +114,10 @@ public class DriveControl_3 extends OpMode {
 
         }
 
+        //support arm
+        if (gamepad2.left_trigger > 0.1) armServo.setPosition(ARM_CLOSE);
+        else armServo.setPosition(ARM_OPEN);
+
         //logging
         telemetry.addData("stickRightX1", stickRightX1);
         telemetry.addData("stickRightY1", stickRightY1);

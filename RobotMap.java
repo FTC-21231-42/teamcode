@@ -41,11 +41,16 @@ public class RobotMap {
 
     static int ELE_MIN_POS = 0;
 //    static int ELE_MAX_POS = 2050;
-    static int ELE_MAX_POS = 2850;
+//    static int ELE_MAX_POS = 2850;
+    static int ELE_MAX_POS = 4830;
 
     static double COLLECT_MIN_POS = 0.045;
-    static double COLLECT_MAX_POS = 0.195;
+    static double COLLECT_MAX_POS = 0.205;
+//    static double COLLECT_MAX_POS = 0.195;
     static boolean COLLECT_CURRENT = false;
+
+    static double ARM_CLOSE = 0.53;
+    static double ARM_OPEN = 1;
 
     static int ELE_COL = 450;
     static int ELE_BOT = 1400;
@@ -58,6 +63,7 @@ public class RobotMap {
 //    static int ELE_TOP = 2050;
 
     static Servo collectorServo;
+    static Servo armServo;
 
     enum IconType{
         BOLT,
@@ -96,6 +102,7 @@ public class RobotMap {
 
         //Servos
         collectorServo = hwMap.get(Servo.class, "collectorServo");
+        armServo = hwMap.get(Servo.class, "armServo");
 
         //Init hardware
         leftFrontMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -121,12 +128,12 @@ public class RobotMap {
         eleMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         eleMotor.setDirection(DcMotorSimple.Direction.REVERSE);
 
-//        collectorServo.setPosition(0);
+        Claw(false);
 
-            lfPos = 0;
-            rfPos = 0;
-            lbPos = 0;
-            rbPos = 0;
+        lfPos = 0;
+        rfPos = 0;
+        lbPos = 0;
+        rbPos = 0;
 
     }
 
