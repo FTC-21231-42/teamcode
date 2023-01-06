@@ -52,10 +52,15 @@ public class RobotMap {
     static double ARM_CLOSE = 0.53;
     static double ARM_OPEN = 1;
 
-    static int ELE_COL = 450;
-    static int ELE_BOT = 1400;
-    static int ELE_MID = 2150;
-    static int ELE_TOP = 2850;
+    static int ELE_COL = 1000;
+    static int ELE_BOT = 2200;
+    static int ELE_MID = 3600;
+    static int ELE_TOP = 4575;
+
+//    static int ELE_COL = 450;
+//    static int ELE_BOT = 1400;
+//    static int ELE_MID = 2150;
+//    static int ELE_TOP = 2850;
 
 //    static int ELE_COL = 225;
 //    static int ELE_BOT = 1000;

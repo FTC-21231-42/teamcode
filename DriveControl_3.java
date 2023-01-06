@@ -23,6 +23,9 @@ public class DriveControl_3 extends OpMode {
     ElapsedTime runtimeCol = new ElapsedTime();
     ElapsedTime runtimeEle = new ElapsedTime();
 
+    double timeLast;
+    double level;
+
     @Override
     public void init() {
         //init hardware
@@ -36,8 +39,6 @@ public class DriveControl_3 extends OpMode {
 
     @Override
     public void loop() {
-        //main
-
         //get the input from the game pad
 //        stickLeftX1 = this.gamepad1.right_stick_x;
 //        stickLeftY1 = this.gamepad1.right_stick_y;
@@ -65,12 +66,12 @@ public class DriveControl_3 extends OpMode {
         rightFrontMotor.setPower(-rightFrontPower);
         leftBotMotor.setPower(leftBotPower);
         rightBotMotor.setPower(-rightBotPower);
-        //end of driving
 
 //        elePos = eleMotor.getCurrentPosition();
 
-        //elevator
-        if (gamepad2.a && runtimeCol.seconds() >= 0.2) {
+        //elevator button control
+//        /*
+        if (gamepad2.a && runtimeCol.seconds() >= 0.15) {
             if (eleDowning) {
 //                eleTargetPos = 0;
                 Elevator(0);
@@ -86,13 +87,21 @@ public class DriveControl_3 extends OpMode {
             runtimeCol.reset();
 
         }
-//        if (gamepad2.b) eleTargetPos = ELE_BOT;
-//        if (gamepad2.x) eleTargetPos = ELE_MID;
-//        if (gamepad2.y) eleTargetPos = ELE_TOP;
-
         if (gamepad2.b) Elevator(ELE_BOT);
-        if (gamepad2.x) Elevator(ELE_MID);;
-        if (gamepad2.y) Elevator(ELE_TOP);;
+        if (gamepad2.x) Elevator(ELE_MID);
+        if (gamepad2.y) Elevator(ELE_TOP);
+
+//        */
+
+        //elevator stick control
+        /*
+        level -= gamepad2.left_stick_y * (runtimeEle.seconds() - timeLast);
+        if (level < 0) level = 0;
+        if (level > ELE_MAX_POS) level = ELE_MAX_POS;
+        Elevator(level);
+        timeLast = runtimeEle.seconds();
+
+         */
 
 //        eleMotor.setTargetPosition(eleTargetPos);
 //        eleMotor.setPower(1);
