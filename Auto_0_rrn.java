@@ -16,7 +16,7 @@ import org.firstinspires.ftc.robotcore.external.tfod.TFObjectDetector;
 
 import java.util.List;
 
-@Autonomous(name = "Auto_new_red_right", group = "0")
+@Autonomous(name = "Auto_New_RedRight", group = "0")
 public class Auto_0_rrn extends LinearOpMode {
     static ElapsedTime runtime = new ElapsedTime();
 

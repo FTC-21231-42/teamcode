@@ -24,7 +24,7 @@ public class DriveControl_3 extends OpMode {
     ElapsedTime runtimeEle = new ElapsedTime();
 
     double timeLast;
-    double level;
+    double level = 0;
 
     @Override
     public void init() {

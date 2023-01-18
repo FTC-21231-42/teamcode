@@ -16,7 +16,7 @@ import org.firstinspires.ftc.robotcore.external.tfod.TFObjectDetector;
 
 import java.util.List;
 
-@Autonomous(name = "Auto_new_bule_left", group = "0")
+@Autonomous(name = "Auto_New_BlueLeft", group = "0")
 public class Auto_0_bln extends LinearOpMode {
     static ElapsedTime runtime = new ElapsedTime();
 
@@ -58,7 +58,12 @@ public class Auto_0_bln extends LinearOpMode {
         Elevator(ELE_COL);
         sleep(50);
 
-        Move(-65, 0.8, Direction.LEFT_RIGHT, 2);
+        Move(90, 0.8, Direction.LEFT_RIGHT, 3);
+        Move(-10, 0.6, Direction.FRONT_BACK, 1.5);
+
+
+
+        Move(-125, 0.8, Direction.LEFT_RIGHT, 3);
         Move(63, 0.8, Direction.FRONT_BACK, 3);
         Elevator(ELE_TOP);
         Move(-43.5, 0.8, Direction.LEFT_RIGHT, 2);
