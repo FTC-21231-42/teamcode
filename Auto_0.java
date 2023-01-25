@@ -45,7 +45,7 @@ public class Auto_0 extends LinearOpMode {
 
         //if can see anything after 5 seconds
         runtime.reset();
-        while (opModeIsActive() && targetPos == IconTypeN.NA && runtime.seconds() < 10.0) {
+        while (opModeIsActive() && targetPos == IconTypeN.NA && runtime.seconds() < 8.0) {
             //detect icon
             targetPos = detectObject();
             sleep(20);
@@ -58,37 +58,41 @@ public class Auto_0 extends LinearOpMode {
         Elevator(ELE_COL);
         sleep(50);
 
-        Move(-0, 0.8, Direction.LEFT_RIGHT, 2);
-        Move(70, 0.8, Direction.FRONT_BACK, 3);
+        Move(110, 0.4, Direction.LEFT_RIGHT, 3);
+        Move(-10, 0.4, Direction.FRONT_BACK, 1.5);
+        Move(3, 0.4, Direction.FRONT_BACK, 1.5);
+
+        Move(-150, 0.75, Direction.LEFT_RIGHT, 3);
+        Move(50, 0.75, Direction.FRONT_BACK, 3);
         Elevator(ELE_TOP);
-        Move(41, 0.8, Direction.LEFT_RIGHT, 2);
-        Move(8, 0.8, Direction.FRONT_BACK, 2);
+        Move(-42, 0.75, Direction.LEFT_RIGHT, 2);
+        Move(12, 0.75, Direction.FRONT_BACK, 2);
         sleep(400);
 
         Claw(false);
         sleep(400);
 
-        Move(-15, 0.8, Direction.FRONT_BACK, 1);
+        Move(-13, 0.75, Direction.FRONT_BACK, 1);
 
         //move to stop position
         switch (targetPos) {
             case ONE:
-                Move(-160, 0.8, Direction.LEFT_RIGHT, 3);
+                Move(40, 0.75, Direction.LEFT_RIGHT, 3);
 
                 break;
 
             case TWO:
-                Move(-100, 0.8, Direction.LEFT_RIGHT, 3);
+                Move(100, 0.75, Direction.LEFT_RIGHT, 3);
 
                 break;
 
             case THREE:
-                Move(-40, 0.8, Direction.LEFT_RIGHT, 3);
+                Move(175, 0.75, Direction.LEFT_RIGHT, 3);
 
                 break;
 
             case NA:
-                Move(-100, 0.8, Direction.LEFT_RIGHT, 3);
+                Move(100, 0.75, Direction.LEFT_RIGHT, 3);
 
                 break;
 
@@ -97,6 +101,7 @@ public class Auto_0 extends LinearOpMode {
         sleep(150);
         Elevator(ELE_MIN_POS);
         sleep(2000);
+
 
     }
 
