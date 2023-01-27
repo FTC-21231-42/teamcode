@@ -38,6 +38,9 @@ public class Auto_0 extends LinearOpMode {
         }
 
         Claw(true);
+        colExtendServo.setPower(-0.8);
+        sleep(1250);
+        colExtendServo.setPower(0);
 
         telemetry.addData("Initialized", "True");
         telemetry.update();
@@ -54,6 +57,8 @@ public class Auto_0 extends LinearOpMode {
 
         telemetry.addData("TargetPos", targetPos);
         telemetry.update();
+
+//        sleep(50000);
 
         Elevator(ELE_COL);
         sleep(50);
