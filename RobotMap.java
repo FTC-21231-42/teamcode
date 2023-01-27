@@ -69,6 +69,7 @@ public class RobotMap {
 
     static Servo collectorServo;
     static Servo armServo;
+    static CRServo colExtendServo;
 
     enum IconType{
         BOLT,
@@ -108,6 +109,7 @@ public class RobotMap {
         //Servos
         collectorServo = hwMap.get(Servo.class, "collectorServo");
         armServo = hwMap.get(Servo.class, "armServo");
+        colExtendServo = hwMap.get(CRServo.class, "colExtendServo");
 
         //Init hardware
         leftFrontMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);

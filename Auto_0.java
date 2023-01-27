@@ -126,7 +126,7 @@ public class Auto_0 extends LinearOpMode {
     }
 
     /**
-     * Move the robot
+     * Move the robot (Global Motor Position Version)
      * axle (by power and direction): y+ being front, y- being back, x+ being left, x- being right
      * side moving alex: front direction being +
      * Unit: centimeter (cm)

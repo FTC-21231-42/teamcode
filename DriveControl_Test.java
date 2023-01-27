@@ -199,6 +199,11 @@ public class DriveControl_Test extends LinearOpMode {
 
             }
 
+            //col extend
+            if (gamepad2.dpad_up) colExtendServo.setPower(0.8);
+            else if (gamepad2.dpad_down) colExtendServo.setPower(-0.8);
+            else colExtendServo.setPower(0);
+
 
             //logging
             telemetry.addData("stickRightX1", stickRightX1);
@@ -211,6 +216,8 @@ public class DriveControl_Test extends LinearOpMode {
             telemetry.addData("elePos", elePos);
             telemetry.addData("armPos", armServo.getPosition());
             telemetry.addData("collectorPos", collectorPos);
+            telemetry.addData("gamepad2.dpad_up", gamepad2.dpad_up);
+            telemetry.addData("gamepad2.dpad_down", gamepad2.dpad_down);
             telemetry.update();
 
         }
