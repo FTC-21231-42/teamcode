@@ -65,7 +65,7 @@ public class Auto_0 extends LinearOpMode {
 
         Move(110, 0.4, Direction.LEFT_RIGHT, 3);
         Move(-10, 0.4, Direction.FRONT_BACK, 1.5);
-        Move(3, 0.4, Direction.FRONT_BACK, 1.5);
+        Move(3, 0.4, Direction.SIDE_FRONT_RIGHT, 1.5);
 
         Move(-150, 0.75, Direction.LEFT_RIGHT, 3);
         Move(50, 0.75, Direction.FRONT_BACK, 3);
