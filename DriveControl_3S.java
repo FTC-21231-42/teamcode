@@ -1,17 +1,30 @@
 package org.firstinspires.ftc.teamcode;
 
-import static org.firstinspires.ftc.teamcode.RobotMap.*;
+import static org.firstinspires.ftc.teamcode.RobotMap.COLLECT_CURRENT;
+import static org.firstinspires.ftc.teamcode.RobotMap.COLLECT_MAX_POS;
+import static org.firstinspires.ftc.teamcode.RobotMap.COLLECT_MIN_POS;
+import static org.firstinspires.ftc.teamcode.RobotMap.ELE_BOT;
+import static org.firstinspires.ftc.teamcode.RobotMap.ELE_COL;
+import static org.firstinspires.ftc.teamcode.RobotMap.ELE_MID;
+import static org.firstinspires.ftc.teamcode.RobotMap.ELE_TOP;
+import static org.firstinspires.ftc.teamcode.RobotMap.Elevator;
+import static org.firstinspires.ftc.teamcode.RobotMap.colExtendServo;
+import static org.firstinspires.ftc.teamcode.RobotMap.collectorServo;
+import static org.firstinspires.ftc.teamcode.RobotMap.initRobot;
+import static org.firstinspires.ftc.teamcode.RobotMap.leftBotMotor;
+import static org.firstinspires.ftc.teamcode.RobotMap.leftFrontMotor;
+import static org.firstinspires.ftc.teamcode.RobotMap.rightBotMotor;
+import static org.firstinspires.ftc.teamcode.RobotMap.rightFrontMotor;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@TeleOp(name = "DriveControl_new", group = "1")
-public class DriveControl_3 extends OpMode {
+@TeleOp(name = "DriveControl_new_simple", group = "1")
+public class DriveControl_3S extends OpMode {
     //define variables
     double ovaPowerModify = 1.0;
-    double basePower = 0;
+    double basePower = 1.0;
     double leftFrontPower = 0, rightFrontPower = 0, leftBotPower = 0, rightBotPower = 0;
 
     float stickRightX1, stickRightY1, stickLeftX1, stickLeftY1;
@@ -51,8 +64,13 @@ public class DriveControl_3 extends OpMode {
         stickLeftY1 = this.gamepad1.left_stick_y;
 
         //use left trigger 1 and right trigger 1 to control the speed, push to set faster
-        basePower = (((gamepad1.left_trigger + gamepad1.right_trigger) * 0.275) + 0.45) * ovaPowerModify;
-        basePower *= basePower;
+//        basePower = (((gamepad1.left_trigger + gamepad1.right_trigger) * 0.275) + 0.45) * ovaPowerModify;
+//        basePower *= basePower;
+
+        if (this.gamepad1.x) basePower = 0.5;
+        else if (this.gamepad1.a) basePower = 0.75;
+        else if (this.gamepad1.y) basePower = 0.9;
+        else if (this.gamepad1.b) basePower = 1.0;
 
         //set the power of motor
         //FINAL POWER = power * modify
@@ -133,12 +151,12 @@ public class DriveControl_3 extends OpMode {
         else colExtendServo.setPower(0);
 
         //logging
-        telemetry.addData("stickRightX1", stickRightX1);
-        telemetry.addData("stickRightY1", stickRightY1);
-        telemetry.addData("left_stick_x;", gamepad1.left_stick_x);
-        telemetry.addData("left_stick_y;", gamepad1.left_stick_y);
-        telemetry.addData("lTrigger", gamepad1.left_trigger);
-        telemetry.addData("rTrigger", gamepad1.right_trigger);
+//        telemetry.addData("stickRightX1", stickRightX1);
+//        telemetry.addData("stickRightY1", stickRightY1);
+//        telemetry.addData("left_stick_x;", gamepad1.left_stick_x);
+//        telemetry.addData("left_stick_y;", gamepad1.left_stick_y);
+//        telemetry.addData("lTrigger", gamepad1.left_trigger);
+//        telemetry.addData("rTrigger", gamepad1.right_trigger);
         telemetry.addData("bPower", basePower);
         telemetry.addData("elePos", elePos);
         telemetry.update();

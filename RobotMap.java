@@ -173,7 +173,7 @@ public class RobotMap {
     static void Elevator(double level) {
         eleMotor.setTargetPosition((int) level);
         eleMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        if (lastLevel > level) eleMotor.setPower(0.75);
+        if (lastLevel > level) eleMotor.setPower(0.95);
         else eleMotor.setPower(1);
         lastLevel = level;
 

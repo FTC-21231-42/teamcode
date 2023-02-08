@@ -130,7 +130,7 @@ public class Auto_0_bl extends LinearOpMode {
     }
 
     /**
-     * Move the robot
+     * Move the robot (old)
      * axle (by power and direction): y+ being front, y- being back, x+ being right, x- being left
      * side moving alex: front direction being +
      * Unit: centimeter (cm)
