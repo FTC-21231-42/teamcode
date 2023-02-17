@@ -126,7 +126,8 @@ public class DriveControl_3S extends OpMode {
 //        eleMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         //collector
-        if (gamepad2.right_trigger > 0.1 && runtimeCol.seconds() >= 0.5) {
+        //one button open and close
+        if ((gamepad1.right_trigger > 0.1 || gamepad1.right_bumper) && runtimeCol.seconds() >= 0.5) {
             if (COLLECT_CURRENT) {
                 collectorServo.setPosition(COLLECT_MAX_POS);
                 COLLECT_CURRENT = false;

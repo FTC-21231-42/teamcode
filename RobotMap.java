@@ -36,6 +36,7 @@ public class RobotMap {
 
     static DcMotor leftFrontMotor, rightFrontMotor, leftBotMotor, rightBotMotor;
     static DcMotor eleMotor;
+    static  DcMotor encoder;
 
     static int lfPos, rfPos, lbPos, rbPos;
 
@@ -106,6 +107,8 @@ public class RobotMap {
 
         eleMotor = hwMap.get(DcMotor.class, "eleMotor");
 
+        encoder = hwMap.get(DcMotor.class, "encoder");
+
         //Servos
         collectorServo = hwMap.get(Servo.class, "collectorServo");
         armServo = hwMap.get(Servo.class, "armServo");
@@ -126,6 +129,10 @@ public class RobotMap {
 
         eleMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 //        eleMotor.setTargetPosition(0);
+
+        //Encoders
+        encoder.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        encoder.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         leftFrontMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightFrontMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);

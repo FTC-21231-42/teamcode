@@ -184,7 +184,7 @@ public class DriveControl_Test extends LinearOpMode {
 
 
             //one button open and close
-            if (gamepad1.right_trigger > 0.1 && runtime.seconds() >= 0.5) {
+            if ((gamepad1.right_trigger > 0.1 || gamepad1.right_bumper) && runtime.seconds() >= 0.5) {
                 if (COLLECT_CURRENT) {
                     collectorServo.setPosition(COLLECT_MAX_POS);
                     COLLECT_CURRENT = false;
@@ -204,8 +204,8 @@ public class DriveControl_Test extends LinearOpMode {
             else if (gamepad2.dpad_down) colExtendServo.setPower(-0.8);
             else colExtendServo.setPower(0);
 
-
             //logging
+            telemetry.addData("encoder", encoder.getCurrentPosition());
             telemetry.addData("stickRightX1", stickRightX1);
             telemetry.addData("stickRightY1", stickRightY1);
             telemetry.addData("left_stick_x;", gamepad1.left_stick_x);
